@@ -1,4 +1,4 @@
-# TTS-LSJ-Tools - 独立文本转语音工具
+# TTS-LSJ-Tools - 简易文本转语音工具
 
 [![GitHub Repo stars](https://img.shields.io/github/stars/RusianHu/TTS-LSJ-tools?style=flat-square)](https://github.com/RusianHu/TTS-LSJ-tools/stargazers)
 [![GitHub forks](https://img.shields.io/github/forks/RusianHu/TTS-LSJ-tools?style=flat-square)](https://github.com/RusianHu/TTS-LSJ-tools/network/members)
