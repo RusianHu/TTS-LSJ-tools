@@ -4,7 +4,6 @@
 [![GitHub forks](https://img.shields.io/github/forks/rusianhu/tts-lsj-tools?style=flat-square)](https://github.com/rusianhu/tts-lsj-tools/network/members)
 [![GitHub issues](https://img.shields.io/github/issues/rusianhu/tts-lsj-tools?style=flat-square)](https://github.com/rusianhu/tts-lsj-tools/issues)
 [![GitHub license](https://img.shields.io/github/license/rusianhu/tts-lsj-tools?style=flat-square)](LICENSE)
-[![Last commit](https://img.shields.io/github/last-commit/rusianhu/tts-lsj-tools?style=flat-square)](https://github.com/rusianhu/tts-lsj-tools/commits/main)
 
 简易的 TTS（文本转语音）工具，基于 Streamlit 构建简洁的 WebUI 界面。
 
