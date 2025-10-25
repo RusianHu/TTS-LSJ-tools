@@ -1,0 +1,29 @@
+# TTS Standalone Configuration File
+
+# 项目名称
+project_name = "TTS Standalone"
+# 项目版本
+project_version = "1.0.0"
+# 日志级别: DEBUG, INFO, WARNING, ERROR
+log_level = "INFO"
+
+[azure]
+# Azure Speech API Key
+# Get your API key at https://portal.azure.com/#view/Microsoft_Azure_ProjectOxford/CognitiveServicesHub/~/SpeechServices
+speech_key = ""
+speech_region = ""
+
+[siliconflow]
+# SiliconFlow API Key
+# Get your API key at https://siliconflow.cn
+api_key = ""
+
+[ui]
+# UI related settings
+# 界面语言: zh (中文), en (English)
+language = "zh"
+# TTS服务器: azure-tts-v1, azure-tts-v2, siliconflow
+tts_server = "azure-tts-v1"
+# 默认声音名称
+voice_name = ""
+

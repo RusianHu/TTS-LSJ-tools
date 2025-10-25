@@ -1,0 +1,8 @@
+streamlit==1.45.0
+edge_tts==6.1.19
+loguru==0.7.3
+azure-cognitiveservices-speech==1.41.1
+requests>=2.31.0
+toml
+moviepy==2.1.2
+
