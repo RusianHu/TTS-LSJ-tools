@@ -1,5 +1,11 @@
 # TTS-LSJ-Tools - 独立文本转语音工具
 
+[![GitHub Repo stars](https://img.shields.io/github/stars/RusianHu/TTS-LSJ-tools?style=flat-square)](https://github.com/RusianHu/TTS-LSJ-tools/stargazers)
+[![GitHub forks](https://img.shields.io/github/forks/RusianHu/TTS-LSJ-tools?style=flat-square)](https://github.com/RusianHu/TTS-LSJ-tools/network/members)
+[![GitHub issues](https://img.shields.io/github/issues/RusianHu/TTS-LSJ-tools?style=flat-square)](https://github.com/RusianHu/TTS-LSJ-tools/issues)
+[![GitHub license](https://img.shields.io/github/license/RusianHu/TTS-LSJ-tools?style=flat-square)](LICENSE)
+[![Last commit](https://img.shields.io/github/last-commit/RusianHu/TTS-LSJ-tools?style=flat-square)](https://github.com/RusianHu/TTS-LSJ-tools/commits/main)
+
 简易的 TTS（文本转语音）工具，基于 Streamlit 构建简洁的 WebUI 界面。
 
 ## 功能特性
@@ -15,10 +21,11 @@
 
 ## 安装步骤
 
-### 1. 克隆或下载项目
+### 1. 从 GitHub 克隆项目
 
 ```bash
-cd TTS-LSJ-Tools
+git clone https://github.com/RusianHu/TTS-LSJ-tools.git
+cd TTS-LSJ-tools
 ```
 
 ### 2. 安装依赖
@@ -137,3 +144,7 @@ TTS-LSJ-Tools/
 - **azure-cognitiveservices-speech**: Azure TTS V2 SDK
 - **moviepy**: 音频处理
 - **loguru**: 日志管理
+
+## 许可证
+
+本项目使用 [Apache License 2.0](LICENSE) 开源发布。
