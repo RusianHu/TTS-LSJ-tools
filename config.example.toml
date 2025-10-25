@@ -1,7 +1,7 @@
-# TTS Standalone Configuration File
+# TTS-LSJ-Tools Configuration File
 
 # 项目名称
-project_name = "TTS Standalone"
+project_name = "TTS-LSJ-Tools"
 # 项目版本
 project_version = "1.0.0"
 # 日志级别: DEBUG, INFO, WARNING, ERROR
@@ -26,4 +26,3 @@ language = "zh"
 tts_server = "azure-tts-v1"
 # 默认声音名称
 voice_name = ""
-

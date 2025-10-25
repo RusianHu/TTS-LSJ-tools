@@ -1,33 +1,24 @@
-# TTS Standalone - 独立文本转语音工具
+# TTS-LSJ-Tools - 独立文本转语音工具
 
-这是一个从 [MoneyPrinterTurbo](https://github.com/harry0703/MoneyPrinterTurbo) 项目中提取的独立TTS（文本转语音）工具，提供简洁的WebUI界面。
+简易的 TTS（文本转语音）工具，基于 Streamlit 构建简洁的 WebUI 界面。
 
 ## 功能特性
 
-- 🎙️ **多种TTS引擎支持**
+- 🎙️ **TTS引擎支持**
   - Azure TTS V1 (免费，基于Edge TTS)
   - Azure TTS V2 (需要API KEY，音质更好)
   - 硅基流动 (SiliconFlow，需要API KEY)
 
-- 🌍 **多语言支持**
-  - 支持中文、英文等多种语言
-  - 提供丰富的语音选择
-
 - 📝 **字幕生成**
   - 自动生成SRT格式字幕文件
   - 支持按标点符号智能分句
-
-- 🎨 **友好的WebUI界面**
-  - 基于Streamlit构建
-  - 简洁直观的操作界面
-  - 支持中英文界面切换
 
 ## 安装步骤
 
 ### 1. 克隆或下载项目
 
 ```bash
-cd TTS_Standalone
+cd TTS-LSJ-Tools
 ```
 
 ### 2. 安装依赖
@@ -35,7 +26,7 @@ cd TTS_Standalone
 建议使用Python 3.10或更高版本。
 
 ```bash
-pip install -r requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple
+pip install -r requirements.txt
 ```
 
 ### 3. 配置文件
@@ -102,7 +93,7 @@ streamlit run webui/Main.py
 ## 目录结构
 
 ```
-TTS_Standalone/
+TTS-LSJ-Tools/
 ├── app/
 │   ├── config/          # 配置管理模块
 │   ├── services/        # TTS服务模块
@@ -138,30 +129,6 @@ TTS_Standalone/
 - 支持多种音色
 - 可调节语速和音量
 
-## 常见问题
-
-### 1. 安装依赖时出错
-
-建议使用国内镜像源加速下载：
-
-```bash
-pip install -r requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple
-```
-
-### 2. Azure TTS V2 无法使用
-
-请确保：
-- 已正确填写 `speech_key` 和 `speech_region`
-- API密钥有效且未过期
-- 网络连接正常
-
-### 3. 生成的音频没有声音
-
-请检查：
-- 选择的语音是否与文本语言匹配
-- 文本内容是否正确
-- 是否有网络连接问题
-
 ## 技术栈
 
 - **Python 3.10+**
@@ -170,21 +137,3 @@ pip install -r requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple
 - **azure-cognitiveservices-speech**: Azure TTS V2 SDK
 - **moviepy**: 音频处理
 - **loguru**: 日志管理
-
-## 许可证
-
-本项目基于 [MoneyPrinterTurbo](https://github.com/harry0703/MoneyPrinterTurbo) 项目提取，遵循原项目的开源许可证。
-
-## 致谢
-
-感谢 [MoneyPrinterTurbo](https://github.com/harry0703/MoneyPrinterTurbo) 项目提供的优秀TTS实现。
-
-## 更新日志
-
-### v1.0.0 (2025-10-25)
-- 初始版本发布
-- 支持Azure TTS V1、V2和硅基流动
-- 提供WebUI界面
-- 支持字幕生成
-- 支持中英文界面
-

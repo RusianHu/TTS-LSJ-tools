@@ -54,6 +54,5 @@ ui = _cfg.get(
 
 hostname = socket.gethostname()
 log_level = _cfg.get("log_level", "INFO")
-project_name = _cfg.get("project_name", "TTS Standalone")
+project_name = _cfg.get("project_name", "TTS-LSJ-Tools")
 project_version = _cfg.get("project_version", "1.0.0")
-

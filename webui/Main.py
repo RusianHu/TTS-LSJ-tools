@@ -16,7 +16,7 @@ from app.services import voice
 from app.utils import utils
 
 st.set_page_config(
-    page_title="TTS Standalone",
+    page_title="TTS-LSJ-Tools",
     page_icon="🎙️",
     layout="wide",
     initial_sidebar_state="auto",
@@ -43,7 +43,7 @@ locales = utils.load_locales(i18n_dir)
 title_col, lang_col = st.columns([3, 1])
 
 with title_col:
-    st.title(f"🎙️ TTS Standalone v{config.project_version}")
+    st.title(f"🎙️ TTS-LSJ-Tools v{config.project_version}")
 
 with lang_col:
     display_languages = []
@@ -317,4 +317,3 @@ if generate_button:
 
 # 保存配置
 config.save_config()
-
