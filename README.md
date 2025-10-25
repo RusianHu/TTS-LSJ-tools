@@ -1,10 +1,10 @@
 # TTS-LSJ-Tools - 简易文本转语音工具
 
-[![GitHub Repo stars](https://img.shields.io/github/stars/RusianHu/TTS-LSJ-tools?style=flat-square)](https://github.com/RusianHu/TTS-LSJ-tools/stargazers)
-[![GitHub forks](https://img.shields.io/github/forks/RusianHu/TTS-LSJ-tools?style=flat-square)](https://github.com/RusianHu/TTS-LSJ-tools/network/members)
-[![GitHub issues](https://img.shields.io/github/issues/RusianHu/TTS-LSJ-tools?style=flat-square)](https://github.com/RusianHu/TTS-LSJ-tools/issues)
-[![GitHub license](https://img.shields.io/github/license/RusianHu/TTS-LSJ-tools?style=flat-square)](LICENSE)
-[![Last commit](https://img.shields.io/github/last-commit/RusianHu/TTS-LSJ-tools?style=flat-square)](https://github.com/RusianHu/TTS-LSJ-tools/commits/main)
+[![GitHub Repo stars](https://img.shields.io/github/stars/rusianhu/tts-lsj-tools?style=flat-square)](https://github.com/rusianhu/tts-lsj-tools/stargazers)
+[![GitHub forks](https://img.shields.io/github/forks/rusianhu/tts-lsj-tools?style=flat-square)](https://github.com/rusianhu/tts-lsj-tools/network/members)
+[![GitHub issues](https://img.shields.io/github/issues/rusianhu/tts-lsj-tools?style=flat-square)](https://github.com/rusianhu/tts-lsj-tools/issues)
+[![GitHub license](https://img.shields.io/github/license/rusianhu/tts-lsj-tools?style=flat-square)](LICENSE)
+[![Last commit](https://img.shields.io/github/last-commit/rusianhu/tts-lsj-tools?style=flat-square)](https://github.com/rusianhu/tts-lsj-tools/commits/main)
 
 简易的 TTS（文本转语音）工具，基于 Streamlit 构建简洁的 WebUI 界面。
 
@@ -24,8 +24,8 @@
 ### 1. 从 GitHub 克隆项目
 
 ```bash
-git clone https://github.com/RusianHu/TTS-LSJ-tools.git
-cd TTS-LSJ-tools
+git clone https://github.com/rusianhu/tts-lsj-tools.git
+cd tts-lsj-tools
 ```
 
 ### 2. 安装依赖
