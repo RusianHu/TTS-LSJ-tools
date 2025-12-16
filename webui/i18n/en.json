@@ -6,6 +6,8 @@
     "Azure TTS V1": "Azure TTS V1 (Free, using Edge TTS)",
     "Azure TTS V2": "Azure TTS V2 (Requires API KEY, better quality)",
     "SiliconFlow": "SiliconFlow (Requires API KEY)",
+    "Voice Region": "Voice Region",
+    "All Regions": "All Regions",
     "Speech Synthesis": "Voice",
     "Speech Region": "Speech Region",
     "Speech Key": "API Key",
@@ -38,7 +40,20 @@
     "Audio File": "Audio File",
     "Subtitle File": "Subtitle File",
     "Generate Subtitle": "Generate Subtitle",
-    "Settings": "Settings"
+    "Settings": "Settings",
+    "region_zh-CN": "Chinese (Mainland)",
+    "region_zh-HK": "Chinese (Hong Kong)",
+    "region_zh-TW": "Chinese (Taiwan)",
+    "region_en-US": "English (US)",
+    "region_en-AU": "English (Australia)",
+    "region_ja-JP": "Japanese",
+    "region_ko-KR": "Korean",
+    "region_de-DE": "German",
+    "region_fr-FR": "French",
+    "region_es-ES": "Spanish",
+    "region_it-IT": "Italian",
+    "region_pt-BR": "Portuguese (Brazil)",
+    "region_af-ZA": "Afrikaans"
   }
 }
 

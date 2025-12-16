@@ -27,6 +27,27 @@ streamlit_style = """
 h1 {
     padding-top: 0 !important;
 }
+/* 优化选择器样式 */
+.stSelectbox > div > div {
+    border-radius: 8px;
+}
+/* 优化按钮样式 */
+.stButton > button {
+    border-radius: 8px;
+    transition: all 0.2s ease;
+}
+.stButton > button:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+/* 优化文本区域 */
+.stTextArea > div > div > textarea {
+    border-radius: 8px;
+}
+/* 优化下载按钮 */
+.stDownloadButton > button {
+    border-radius: 8px;
+}
 </style>
 """
 st.markdown(streamlit_style, unsafe_allow_html=True)
@@ -99,61 +120,108 @@ selected_tts_server = tts_servers[selected_tts_server_index][0]
 config.ui["tts_server"] = selected_tts_server
 
 # 根据选择的TTS服务器获取声音列表
-filtered_voices = []
+voice_name = ""
 
 if selected_tts_server == "siliconflow":
+    # 硅基流动不需要区域选择
     filtered_voices = voice.get_siliconflow_voices()
-else:
-    all_voices = voice.get_all_azure_voices(filter_locals=None)
-    for v in all_voices:
-        if selected_tts_server == "azure-tts-v2":
-            if "V2" in v:
-                filtered_voices.append(v)
-        else:
-            if "V2" not in v:
-                filtered_voices.append(v)
+    friendly_names = {
+        v: v.replace("Female", tr("Female"))
+        .replace("Male", tr("Male"))
+        .replace("Neural", "")
+        for v in filtered_voices
+    }
 
-friendly_names = {
-    v: v.replace("Female", tr("Female"))
-    .replace("Male", tr("Male"))
-    .replace("Neural", "")
-    for v in filtered_voices
-}
-
-saved_voice_name = config.ui.get("voice_name", "")
-saved_voice_name_index = 0
-
-if saved_voice_name in friendly_names:
-    saved_voice_name_index = list(friendly_names.keys()).index(saved_voice_name)
-else:
-    for i, v in enumerate(filtered_voices):
-        if v.lower().startswith(st.session_state["ui_language"].lower()):
-            saved_voice_name_index = i
-            break
-
-if saved_voice_name_index >= len(friendly_names) and friendly_names:
+    saved_voice_name = config.ui.get("voice_name", "")
     saved_voice_name_index = 0
+    if saved_voice_name in friendly_names:
+        saved_voice_name_index = list(friendly_names.keys()).index(saved_voice_name)
 
-voice_name = ""
-if friendly_names:
-    selected_friendly_name = st.selectbox(
-        tr("Speech Synthesis"),
-        options=list(friendly_names.values()),
-        index=min(saved_voice_name_index, len(friendly_names) - 1)
-        if friendly_names
-        else 0,
-    )
-
-    voice_name = list(friendly_names.keys())[
-        list(friendly_names.values()).index(selected_friendly_name)
-    ]
-    config.ui["voice_name"] = voice_name
-else:
-    st.warning(
-        tr(
-            "No voices available for the selected TTS server. Please select another server."
+    if friendly_names:
+        selected_friendly_name = st.selectbox(
+            tr("Speech Synthesis"),
+            options=list(friendly_names.values()),
+            index=min(saved_voice_name_index, len(friendly_names) - 1),
         )
-    )
+        voice_name = list(friendly_names.keys())[
+            list(friendly_names.values()).index(selected_friendly_name)
+        ]
+        config.ui["voice_name"] = voice_name
+    else:
+        st.warning(tr("No voices available for the selected TTS server. Please select another server."))
+else:
+    # Azure TTS - 使用区域级联选择器
+    is_v2 = selected_tts_server == "azure-tts-v2"
+    available_regions = voice.get_all_regions(v2_only=is_v2)
+
+    # 区域名称映射
+    def get_region_display_name(region_code: str) -> str:
+        return tr(f"region_{region_code}")
+
+    # 获取保存的区域，如果没有则尝试匹配用户语言
+    saved_region = config.ui.get("voice_region", "")
+    saved_region_index = 0
+
+    if saved_region in available_regions:
+        saved_region_index = available_regions.index(saved_region)
+    else:
+        # 根据用户语言自动选择区域
+        ui_lang = st.session_state.get("ui_language", "en")
+        for i, region in enumerate(available_regions):
+            if region.lower().startswith(ui_lang.lower()):
+                saved_region_index = i
+                break
+
+    # 区域选择下拉框
+    region_col, voice_col = st.columns([1, 2])
+
+    with region_col:
+        region_display_names = [get_region_display_name(r) for r in available_regions]
+        selected_region_display = st.selectbox(
+            tr("Voice Region"),
+            options=region_display_names,
+            index=min(saved_region_index, len(available_regions) - 1) if available_regions else 0,
+            key="voice_region_selector",
+        )
+        if available_regions:
+            selected_region = available_regions[region_display_names.index(selected_region_display)]
+            config.ui["voice_region"] = selected_region
+        else:
+            selected_region = ""
+
+    with voice_col:
+        # 根据选择的区域获取声音列表
+        if selected_region:
+            filtered_voices = voice.get_azure_voices_by_region(selected_region, v2_only=is_v2)
+        else:
+            filtered_voices = []
+
+        friendly_names = {
+            v: v.replace("Female", tr("Female"))
+            .replace("Male", tr("Male"))
+            .replace("Neural", "")
+            .replace("-V2", " V2")
+            for v in filtered_voices
+        }
+
+        saved_voice_name = config.ui.get("voice_name", "")
+        saved_voice_name_index = 0
+        if saved_voice_name in friendly_names:
+            saved_voice_name_index = list(friendly_names.keys()).index(saved_voice_name)
+
+        if friendly_names:
+            selected_friendly_name = st.selectbox(
+                tr("Speech Synthesis"),
+                options=list(friendly_names.values()),
+                index=min(saved_voice_name_index, len(friendly_names) - 1),
+                key="voice_name_selector",
+            )
+            voice_name = list(friendly_names.keys())[
+                list(friendly_names.values()).index(selected_friendly_name)
+            ]
+            config.ui["voice_name"] = voice_name
+        else:
+            st.warning(tr("No voices available for the selected TTS server. Please select another server."))
 
 # 当选择V2版本或者声音是V2声音时，显示服务区域和API key输入框
 if selected_tts_server == "azure-tts-v2" or (
@@ -200,17 +268,20 @@ if selected_tts_server == "siliconflow" or (
 
     config.siliconflow["api_key"] = siliconflow_api_key
 
-voice_volume = st.selectbox(
-    tr("Speech Volume"),
-    options=[0.6, 0.8, 1.0, 1.2, 1.5, 2.0, 3.0, 4.0, 5.0],
-    index=2,
-)
-
-voice_rate = st.selectbox(
-    tr("Speech Rate"),
-    options=[0.8, 0.9, 1.0, 1.1, 1.2, 1.3, 1.5, 1.8, 2.0],
-    index=2,
-)
+# 音量和速度放在同一行
+vol_col, rate_col = st.columns(2)
+with vol_col:
+    voice_volume = st.selectbox(
+        tr("Speech Volume"),
+        options=[0.6, 0.8, 1.0, 1.2, 1.5, 2.0, 3.0, 4.0, 5.0],
+        index=2,
+    )
+with rate_col:
+    voice_rate = st.selectbox(
+        tr("Speech Rate"),
+        options=[0.8, 0.9, 1.0, 1.1, 1.2, 1.3, 1.5, 1.8, 2.0],
+        index=2,
+    )
 
 # 文本输入
 st.markdown("---")

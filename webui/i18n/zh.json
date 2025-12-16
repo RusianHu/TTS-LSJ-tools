@@ -6,6 +6,8 @@
     "Azure TTS V1": "Azure TTS V1 (免费，使用Edge TTS)",
     "Azure TTS V2": "Azure TTS V2 (需要API KEY，效果更好)",
     "SiliconFlow": "硅基流动 (需要API KEY)",
+    "Voice Region": "语音区域",
+    "All Regions": "全部区域",
     "Speech Synthesis": "朗读声音",
     "Speech Region": "服务区域",
     "Speech Key": "API Key",
@@ -38,7 +40,20 @@
     "Audio File": "音频文件",
     "Subtitle File": "字幕文件",
     "Generate Subtitle": "生成字幕",
-    "Settings": "设置"
+    "Settings": "设置",
+    "region_zh-CN": "中文 (普通话)",
+    "region_zh-HK": "中文 (粤语)",
+    "region_zh-TW": "中文 (台湾)",
+    "region_en-US": "英语 (美国)",
+    "region_en-AU": "英语 (澳大利亚)",
+    "region_ja-JP": "日语",
+    "region_ko-KR": "韩语",
+    "region_de-DE": "德语",
+    "region_fr-FR": "法语",
+    "region_es-ES": "西班牙语",
+    "region_it-IT": "意大利语",
+    "region_pt-BR": "葡萄牙语 (巴西)",
+    "region_af-ZA": "南非荷兰语"
   }
 }
 

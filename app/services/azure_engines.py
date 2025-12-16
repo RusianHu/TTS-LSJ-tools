@@ -141,6 +141,45 @@ Gender: Male
 Name: es-ES-ElviraNeural
 Gender: Female
 
+Name: es-ES-XimenaNeural
+Gender: Female
+
+Name: en-AU-WilliamMultilingualNeural
+Gender: Male
+
+Name: en-US-AndrewMultilingualNeural
+Gender: Male
+
+Name: en-US-AvaMultilingualNeural
+Gender: Female
+
+Name: en-US-BrianMultilingualNeural
+Gender: Male
+
+Name: en-US-EmmaMultilingualNeural
+Gender: Female
+
+Name: de-DE-FlorianMultilingualNeural
+Gender: Male
+
+Name: de-DE-SeraphinaMultilingualNeural
+Gender: Female
+
+Name: fr-FR-RemyMultilingualNeural
+Gender: Male
+
+Name: fr-FR-VivienneMultilingualNeural
+Gender: Female
+
+Name: it-IT-GiuseppeMultilingualNeural
+Gender: Male
+
+Name: ko-KR-HyunsuMultilingualNeural
+Gender: Male
+
+Name: pt-BR-ThalitaMultilingualNeural
+Gender: Female
+
 Name: zh-CN-XiaoxiaoMultilingualNeural-V2
 Gender: Female
 
@@ -174,6 +213,48 @@ Gender: Female
 
 _VOICE_PATTERN = re.compile(r"Name:\s*(.+)\s*Gender:\s*(.+)\s*", re.MULTILINE)
 
+# 区域代码到区域名称的映射
+VOICE_REGIONS = {
+    "zh-CN": "Chinese (Mainland)",
+    "zh-HK": "Chinese (Hong Kong)",
+    "zh-TW": "Chinese (Taiwan)",
+    "en-US": "English (US)",
+    "en-AU": "English (Australia)",
+    "ja-JP": "Japanese",
+    "ko-KR": "Korean",
+    "de-DE": "German",
+    "fr-FR": "French",
+    "es-ES": "Spanish",
+    "it-IT": "Italian",
+    "pt-BR": "Portuguese (Brazil)",
+    "af-ZA": "Afrikaans",
+}
+
+
+def get_voice_region(voice_name: str) -> str:
+    """从声音名称中提取区域代码，如 zh-CN-XiaoxiaoNeural -> zh-CN"""
+    # 去掉性别后缀
+    clean_name = voice_name.replace("-Female", "").replace("-Male", "")
+    parts = clean_name.split("-")
+    if len(parts) >= 2:
+        return f"{parts[0]}-{parts[1]}"
+    return ""
+
+
+def get_all_regions(v2_only: bool = False) -> list[str]:
+    """获取所有可用区域列表"""
+    regions = set()
+    matches = _VOICE_PATTERN.findall(AZURE_VOICES_BLOCK)
+    for name, gender in matches:
+        if v2_only and "-V2" not in name:
+            continue
+        if not v2_only and "-V2" in name:
+            continue
+        region = get_voice_region(name)
+        if region:
+            regions.add(region)
+    return sorted(list(regions))
+
 
 def get_all_azure_voices(filter_locals=None) -> list[str]:
     voices = []
@@ -185,6 +266,24 @@ def get_all_azure_voices(filter_locals=None) -> list[str]:
         ):
             voices.append(f"{name}-{gender}")
         elif not filter_locals:
+            voices.append(f"{name}-{gender}")
+
+    voices.sort()
+    return voices
+
+
+def get_azure_voices_by_region(region: str, v2_only: bool = False) -> list[str]:
+    """根据区域获取声音列表"""
+    voices = []
+    matches = _VOICE_PATTERN.findall(AZURE_VOICES_BLOCK)
+
+    for name, gender in matches:
+        if v2_only and "-V2" not in name:
+            continue
+        if not v2_only and "-V2" in name:
+            continue
+        voice_region = get_voice_region(name)
+        if voice_region == region:
             voices.append(f"{name}-{gender}")
 
     voices.sort()
@@ -357,7 +456,11 @@ __all__ = [
     "AzureTTSV2Engine",
     "convert_rate_to_percent",
     "get_all_azure_voices",
+    "get_all_regions",
+    "get_azure_voices_by_region",
+    "get_voice_region",
     "is_azure_v2_voice",
     "parse_voice_name",
+    "VOICE_REGIONS",
 ]
 
